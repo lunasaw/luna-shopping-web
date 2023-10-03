@@ -23,7 +23,7 @@
             placeholder="请输入图形验证码"
             type="text"
           />
-          <img src="@/assets/images/page/code.png" alt="" />
+          <img v-if="picUrl" :src="picUrl" alt="" @click="getPicCode" />
         </div>
         <div class="form-item">
           <input class="inp" placeholder="请输入短信验证码" type="text" />
@@ -44,14 +44,29 @@
 </template>
 
 <script>
+import loginApi from "@/api/login";
+
 export default {
   name: "LoginPage",
   data() {
     return {
       isActive: false,
+      picUrl: "",
+      picKey: "",
     };
   },
+  async created() {
+    this.getPicCode();
+  },
   methods: {
+    // 获取图形验证码
+    async getPicCode() {
+      const {
+        data: { base64, key },
+      } = await loginApi.getPicCode();
+      this.picUrl = base64;
+      this.picKey = key;
+    },
     login() {
       this.$router.push("/home");
     },
@@ -135,7 +150,7 @@ export default {
   }
 
   .login-btn.active {
-    transform: translateY(10px);
+    transform: translateY(-3px);
     transition: all 0.4s ease;
   }
 }
