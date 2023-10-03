@@ -1,0 +1,10 @@
+{
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "workbench.editor.wrapTabs": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "terminal.integrated.tabs.showActions": "always",
+    "workbench.editor.scrollToSwitchTabs": false,
+    "workbench.editor.showTabs": true,
+    "files.autoSave": "afterDelay",
+    "vue.codeActions.enabled": false
+}
