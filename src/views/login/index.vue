@@ -31,7 +31,14 @@
         </div>
       </div>
 
-      <div class="login-btn">登录</div>
+      <div
+        class="login-btn"
+        ref="loginButton"
+        :class="{ active: isActive }"
+        @click="onClick"
+      >
+        登录
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +46,22 @@
 <script>
 export default {
   name: "LoginPage",
+  data() {
+    return {
+      isActive: false,
+    };
+  },
+  methods: {
+    login() {
+      this.$router.push("/home");
+    },
+    onClick() {
+      this.isActive = true;
+      setTimeout(() => {
+        this.isActive = false;
+      }, 300);
+    },
+  },
 };
 </script>
 
@@ -92,13 +115,28 @@ export default {
     height: 42px;
     margin-top: 39px;
     background: linear-gradient(90deg, #ecb53c, #ff9211);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     color: #fff;
-    border-radius: 39px;
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: bold;
     letter-spacing: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background-color: #4d8fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .login-btn.active {
+    transform: translateY(10px);
+    transition: all 0.4s ease;
   }
 }
 </style>
