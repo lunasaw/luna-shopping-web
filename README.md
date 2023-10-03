@@ -3,6 +3,8 @@
 ## Project setup
 ```
 npm install
+vw 适配 npm install postcss-px-to-viewport -D
+vant 插件 npm i babel-plugin-import -D
 ```
 
 ### Compiles and hot-reloads for development
