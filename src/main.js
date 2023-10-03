@@ -6,7 +6,8 @@ Vue.config.productionTip = false;
 import router from "./router";
 import Particles from "vue2-particles";
 import store from "./store";
-import "./utils/vant-ui";
+import "@/utils/vant-ui";
+import "@/style/common.less";
 Vue.use(Particles);
 
 new Vue({
