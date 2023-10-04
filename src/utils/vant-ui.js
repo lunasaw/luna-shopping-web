@@ -2,8 +2,20 @@ import Vue from "vue";
 import { Button } from "vant";
 import { Tabbar, TabbarItem, NavBar } from "vant";
 import { Toast } from "vant";
+import { Search, Swipe, SwipeItem, Grid, GridItem } from "vant";
 
-const Vant = [Button, Tabbar, TabbarItem, NavBar, Toast];
+const Vant = [
+  Button,
+  Tabbar,
+  TabbarItem,
+  NavBar,
+  Toast,
+  Search,
+  Swipe,
+  SwipeItem,
+  Grid,
+  GridItem,
+];
 
 Vant.forEach((item) => Vue.use(item));
 
