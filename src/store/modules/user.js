@@ -13,4 +13,7 @@ export default {
     },
   },
   actions: {},
+  getters: {
+    userInfo: (state) => state.userInfo,
+  },
 };

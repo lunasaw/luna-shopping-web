@@ -21,6 +21,13 @@ const data = {
     // actions: {},
     // getters: {}
   },
+
+  getters: {
+    notFound: (state) => state.notFound,
+    pageError: (state) => state.pageError,
+    token: (state) => state.user.userInfo.token,
+  },
+
   modules: {
     user,
   },
