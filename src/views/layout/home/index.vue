@@ -54,10 +54,26 @@
 
 <script>
 import GoodsItem from "@/components/GoodsItem.vue";
+import { getHomeData } from "@/api/home";
 export default {
   name: "HomePage",
   components: {
     GoodsItem,
+  },
+  data() {
+    return {
+      bannerList: [],
+      navList: [],
+      proList: [],
+    };
+  },
+  async created() {
+    const {
+      data: { pageData },
+    } = await getHomeData();
+    this.bannerList = pageData.items[1].data;
+    this.navList = pageData.items[3].data;
+    this.proList = pageData.items[6].data;
   },
 };
 </script>

@@ -8,6 +8,8 @@ const request = axios.create({
   timeout: 5000,
 });
 
+request.defaults.headers.post["Content-Type"] = "application/json";
+
 // 添加请求拦截器
 request.interceptors.request.use(
   function (config) {
@@ -69,8 +71,7 @@ export function doPost(url, body) {
   return post(url, {}, {}, JSON.stringify(body));
 }
 
-export function doPostString(url, headers, params, body) {
-  headers[headers().contenType.key] = headers().contenType.value.json;
+export function doPostJson(url, headers, params, body) {
   return post(url, headers, params, JSON.stringify(body));
 }
 
@@ -81,14 +82,14 @@ export function doPostString(url, headers, params, body) {
  * @param {Object} body [请求时携带的请求体参数]
  */
 function post(url, headers, params, body) {
+  headers = Object.assign({}, request.defaults.headers.post, headers);
   return request.post(url, body, {
     headers: headers,
     params: params,
-    withCredentials: true,
   });
 }
 
-export function Obdyheaders() {
+export function Bodyheaders() {
   return {
     contenType: {
       key: "Content-Type",
@@ -106,4 +107,5 @@ export default {
   request,
   doGet,
   doPost,
+  doPostJson,
 };
