@@ -46,4 +46,64 @@ request.interceptors.response.use(
   }
 );
 
-export default request;
+export function doGet(url) {
+  return get(url, {}, {}, {});
+}
+
+/**
+ * get方法，对应get请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ * @param {Object} body [请求时携带的请求体参数]
+ */
+
+function get(url, headers, params, body) {
+  return request.get(url, {
+    headers: headers,
+    params: params,
+    data: body,
+  });
+}
+
+export function doPost(url, body) {
+  return post(url, {}, {}, JSON.stringify(body));
+}
+
+export function doPostString(url, headers, params, body) {
+  headers[headers().contenType.key] = headers().contenType.value.json;
+  return post(url, headers, params, JSON.stringify(body));
+}
+
+/**
+ * post方法，对应post请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ * @param {Object} body [请求时携带的请求体参数]
+ */
+function post(url, headers, params, body) {
+  return request.post(url, body, {
+    headers: headers,
+    params: params,
+    withCredentials: true,
+  });
+}
+
+export function Obdyheaders() {
+  return {
+    contenType: {
+      key: "Content-Type",
+      value: {
+        json: "application/json",
+        wwwFrom: "application/x-www-form-urlencoded",
+        formData: "multipart/form-data",
+        raw: "application/octet-stream",
+      },
+    },
+  };
+}
+
+export default {
+  request,
+  doGet,
+  doPost,
+};
