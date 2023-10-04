@@ -63,9 +63,11 @@
             v-if="!isEdit"
             :class="{ disabled: selCount === 0 }"
             class="goPay"
+            @click="goPay"
           >
             去结算（{{ selCount }}）
           </div>
+
           <div
             v-else
             :class="{ disabled: selCount === 0 }"
@@ -105,6 +107,7 @@ export default {
       "cartTotal",
       "selCount",
       "selPrice",
+      "selCartList",
       "isAllChecked",
     ]),
     isLogin() {
@@ -138,6 +141,17 @@ export default {
         goodsId,
         skuId,
       });
+    },
+    goPay() {
+      if (this.selCount > 0) {
+        this.$router.push({
+          path: "/pay",
+          query: {
+            mode: "cart",
+            cartIds: this.selCartList.map((item) => item.id).join(","),
+          },
+        });
+      }
     },
     async handleDel() {
       if (this.selCount === 0) return;

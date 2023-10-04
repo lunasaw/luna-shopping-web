@@ -6,5 +6,10 @@
     "workbench.editor.scrollToSwitchTabs": false,
     "workbench.editor.showTabs": true,
     "files.autoSave": "afterDelay",
-    "vue.codeActions.enabled": false
+    "vue.codeActions.enabled": false,
+    "prettier.printWidth": 120,
+    "vs-code-prettier-eslint.prettierLast": true,
+    "prettier.trailingComma": "all",
+    "prettier.semi": false,
+    "prettier.bracketSameLine": true
 }

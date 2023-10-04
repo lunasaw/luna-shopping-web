@@ -122,7 +122,9 @@
           <div class="btn" v-if="mode === 'cart'" @click="addCart">
             加入购物车
           </div>
-          <div class="btn now" v-if="mode === 'buyNow'">立刻购买</div>
+          <div class="btn now" v-if="mode === 'buyNow'" @click="goBuyNow">
+            立刻购买
+          </div>
         </div>
         <div class="btn-none" v-else>该商品已抢完</div>
       </div>
@@ -178,6 +180,17 @@ export default {
     },
     goCartPage() {
       this.$router.push("/cart");
+    },
+    goBuyNow() {
+      this.$router.push({
+        path: "/pay",
+        query: {
+          mode: "buyNow",
+          goodsId: this.goodsId,
+          goodsSkuId: this.detail.skuList[0].goods_sku_id,
+          goodsNum: this.addCount,
+        },
+      });
     },
     async getCartTotal() {
       const { data } = await getCartTotal();
