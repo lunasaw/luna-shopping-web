@@ -87,6 +87,7 @@
         <span>首页</span>
       </div>
       <div class="icon-cart">
+        <span v-if="cartTotal > 0" class="num">{{ cartTotal }}</span>
         <van-icon name="shopping-cart-o" />
         <span>购物车</span>
       </div>
@@ -133,7 +134,7 @@
 import { getProDetail, getProComments } from "@/api/product";
 import defaultImg from "@/assets/images/page/default-avatar.png";
 import CountBox from "@/components/CountBox.vue";
-
+import { addCart, getCartTotal } from "@/api/cart";
 export default {
   name: "ProDetail",
   data() {
@@ -147,6 +148,7 @@ export default {
       mode: "cart",
       showPannel: false,
       addCount: 1,
+      cartTotal: 0,
     };
   },
   components: {
@@ -155,13 +157,13 @@ export default {
   async created() {
     this.getDetail();
     this.getComments();
+    this.getCartTotal();
   },
   computed: {
     goodsId() {
       return this.$route.params.id;
     },
   },
-
   methods: {
     onChange(index) {
       this.current = index;
@@ -173,6 +175,10 @@ export default {
     buyFn() {
       this.mode = "buyNow";
       this.showPannel = true;
+    },
+    async getCartTotal() {
+      const { data } = await getCartTotal();
+      this.cartTotal = data.cartTotal;
     },
     async getComments() {
       const {
@@ -209,7 +215,14 @@ export default {
           .catch(() => {});
         return;
       }
-      console.log("进行加入购物车操作");
+      const { data } = await addCart(
+        this.goodsId,
+        this.addCount,
+        this.detail.skuList[0].goods_sku_id
+      );
+      this.cartTotal = data.cartTotal;
+      this.$toast("加入购物车成功");
+      this.showPannel = false;
     },
   },
 };
@@ -409,6 +422,22 @@ export default {
   }
   .btn-none {
     background-color: #cccccc;
+  }
+}
+.footer .icon-cart {
+  position: relative;
+  padding: 0 6px;
+  .num {
+    z-index: 999;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    min-width: 16px;
+    padding: 0 4px;
+    color: #fff;
+    text-align: center;
+    background-color: #ee0a24;
+    border-radius: 50%;
   }
 }
 </style>

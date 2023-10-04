@@ -1,4 +1,5 @@
 /* 封装axios用于发送请求 */
+import store from "@/store";
 import axios from "axios";
 import { Toast } from "vant";
 
@@ -20,6 +21,11 @@ request.interceptors.request.use(
       loadingType: "spinner",
       duration: 0,
     });
+    const token = store.getters.token;
+    if (token) {
+      config.headers["Access-Token"] = token;
+      config.headers.platform = "H5";
+    }
     return config;
   },
   function (error) {
