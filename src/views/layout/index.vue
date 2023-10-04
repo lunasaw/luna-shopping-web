@@ -2,7 +2,7 @@
   <div>
     <h1>Layout</h1>
     <router-view></router-view>
-    <van-tabbar active-color="#ee0a24" inactive-color="#000">
+    <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
       <van-tabbar-item icon="wap-home-o" to="/home">首页</van-tabbar-item>
       <van-tabbar-item icon="apps-o" to="/category">分类页</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" to="/cart"
@@ -17,7 +17,9 @@
 export default {
   name: "LayoutPage",
   data() {
-    return {};
+    return {
+      active: 0,
+    };
   },
   methods: {},
   mounted() {},
