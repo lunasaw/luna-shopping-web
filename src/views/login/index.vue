@@ -28,7 +28,12 @@
           <img v-if="picUrl" :src="picUrl" alt="" @click="getPicCode" />
         </div>
         <div class="form-item">
-          <input class="inp" placeholder="请输入短信验证码" type="text" />
+          <input
+            class="inp"
+            placeholder="请输入短信验证码"
+            type="text"
+            v-model="msgCode"
+          />
           <button @click="getCode">
             {{
               second === totalSecond ? "获取验证码" : second + `秒后重新发送`
@@ -41,7 +46,7 @@
         class="login-btn"
         ref="loginButton"
         :class="{ active: isActive }"
-        @click="onClick"
+        @click="login"
       >
         登录
       </div>
@@ -50,7 +55,7 @@
 </template>
 
 <script>
-import { getPicCode, getMsgCode } from "@/api/login";
+import { getPicCode, getMsgCode, codeLogin } from "@/api/login";
 
 export default {
   name: "LoginPage",
@@ -62,8 +67,9 @@ export default {
       totalSecond: 60, // 总秒数
       second: 60, // 倒计时的秒数
       timer: null, // 定时器 id
-      mobile: "", // 手机号
+      mobile: "15699996579", // 手机号
       picCode: "", // 图形验证码
+      msgCode: "246810", // 短信验证码
     };
   },
   async created() {
@@ -78,8 +84,18 @@ export default {
       this.picUrl = base64;
       this.picKey = key;
     },
-    login() {
-      this.$router.push("/home");
+    async login() {
+      this.onClick();
+      if (!this.validFn()) {
+        return;
+      }
+      if (!/^\d{6}$/.test(this.msgCode)) {
+        this.$toast("请输入正确的手机验证码");
+        return;
+      }
+      await codeLogin(this.mobile, this.msgCode);
+      this.$router.push("/");
+      this.$toast("登录成功");
     },
     onClick() {
       this.isActive = true;
@@ -93,7 +109,7 @@ export default {
         return;
       }
       if (!this.timer && this.second === this.totalSecond) {
-        // 发送请求，获取验证码
+        // 发送请求，获取验证码   246810
         await getMsgCode(this.picCode, this.picKey, this.mobile);
         this.$toast("发送成功，请注意查收");
         // 开启倒计时
@@ -123,8 +139,9 @@ export default {
       return true;
     },
   },
-  destroyed() {
+  beforeDestroy() {
     clearInterval(this.timer);
+    this.timer = null;
   },
 };
 </script>
