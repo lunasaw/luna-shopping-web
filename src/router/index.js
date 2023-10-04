@@ -8,7 +8,7 @@ import Search from "@/views/search";
 import SearchList from "@/views/search/list";
 import Pay from "@/views/pay";
 import MyOrder from "@/views/myorder";
-
+import ProDetail from "@/views/prodetail";
 import Home from "@/views/layout/home";
 import Category from "@/views/layout/category";
 import Cart from "@/views/layout/cart";
@@ -33,7 +33,7 @@ const routes = [
   { path: "/search", component: Search },
   { path: "/searchlist", component: SearchList },
   // 动态路由传参，确认将来是哪个商品，路由参数中携带 id
-  // { path: "/prodetail/:id", component: ProDetail },
+  { path: "/prodetail/:id", component: ProDetail },
   { path: "/pay", component: Pay },
   { path: "/myorder", component: MyOrder },
 ];
