@@ -3,7 +3,7 @@ import { Button } from "vant";
 import { Tabbar, TabbarItem, NavBar } from "vant";
 import { Toast } from "vant";
 import { Search, Swipe, SwipeItem, Grid, GridItem } from "vant";
-
+import { Icon } from "vant";
 const Vant = [
   Button,
   Tabbar,
@@ -15,6 +15,7 @@ const Vant = [
   SwipeItem,
   Grid,
   GridItem,
+  Icon,
 ];
 
 Vant.forEach((item) => Vue.use(item));
