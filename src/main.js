@@ -8,9 +8,8 @@ import Particles from "vue2-particles";
 import store from "./store";
 import "@/utils/vant-ui";
 import "@/styles/common.less";
-import VueLazyload from "vue-lazyload";
 
-Vue.use(Particles).use(VueLazyload);
+Vue.use(Particles);
 
 new Vue({
   render: (h) => h(App),
