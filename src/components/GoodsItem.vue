@@ -1,24 +1,35 @@
 <template>
-  <div class="goods-item" @click="$router.push('/prodetail')">
+  <div
+    v-if="item.goods_name"
+    class="goods-item"
+    @click="$router.push(`/prodetail/${item.goods_id}`)"
+  >
     <div class="left">
-      <img src="@/assets/images/page/product.jpg" alt="" />
+      <img :src="item.goods_image" alt="" />
     </div>
     <div class="right">
       <p class="tit text-ellipsis-2">
-        三星手机 SAMSUNG Galaxy S23 8GB+256GB 超视觉夜拍系统 超清夜景 悠雾紫
-        5G手机 游戏拍照旗舰机s23
+        {{ item.goods_name }}
       </p>
-      <p class="count">已售104件</p>
+      <p class="count">已售 {{ item.goods_sales }}件</p>
       <p class="price">
-        <span class="new">¥3999.00</span>
-        <span class="old">¥6699.00</span>
+        <span class="new">¥{{ item.goods_price_min }}</span>
+        <span class="old">¥{{ item.goods_price_max }}</span>
       </p>
     </div>
   </div>
 </template>
-
 <script>
-export default {};
+export default {
+  props: {
+    item: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>

@@ -102,10 +102,4 @@ export function Bodyheaders() {
     },
   };
 }
-
-export default {
-  request,
-  doGet,
-  doPost,
-  doPostJson,
-};
+export default request;
