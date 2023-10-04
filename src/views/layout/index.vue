@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Layout</h1>
     <router-view></router-view>
     <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
       <van-tabbar-item icon="wap-home-o" to="/home">首页</van-tabbar-item>

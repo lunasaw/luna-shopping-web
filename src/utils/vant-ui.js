@@ -8,7 +8,7 @@ import { Rate } from "vant";
 import { ActionSheet } from "vant";
 import { Lazyload } from "vant";
 import { Dialog } from "vant";
-
+import { Checkbox } from "vant";
 const Vant = [
   Button,
   Tabbar,
@@ -25,6 +25,7 @@ const Vant = [
   ActionSheet,
   Lazyload,
   Dialog,
+  Checkbox,
 ];
 
 Vant.forEach((item) => Vue.use(item));

@@ -86,7 +86,7 @@
         <van-icon name="wap-home-o" />
         <span>首页</span>
       </div>
-      <div class="icon-cart">
+      <div class="icon-cart" @click="goCartPage">
         <span v-if="cartTotal > 0" class="num">{{ cartTotal }}</span>
         <van-icon name="shopping-cart-o" />
         <span>购物车</span>
@@ -175,6 +175,9 @@ export default {
     buyFn() {
       this.mode = "buyNow";
       this.showPannel = true;
+    },
+    goCartPage() {
+      this.$router.push("/cart");
     },
     async getCartTotal() {
       const { data } = await getCartTotal();
