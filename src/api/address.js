@@ -12,6 +12,10 @@ const api = {
 };
 
 // 收货地址列表
+export const getaAddressList = (param) => {
+  return request.get(api.list, param);
+};
+
 export const list = (param) => {
   return request.get(api.list, param);
 };
