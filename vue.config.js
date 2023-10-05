@@ -6,6 +6,6 @@ module.exports = defineConfig({
 const ENV = process.env.NODE_ENV;
 
 module.exports = {
-  publicPath: ENV === "development" ? "" : "/luna-shopping-web/",
+  publicPath: ENV === "development" ? "./" : "/luna-shopping-web/",
   outputDir: "dist",
 };
