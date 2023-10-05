@@ -137,7 +137,6 @@ export default {
         data: { userInfo },
       } = await getUserInfoDetail();
       this.detail = userInfo;
-      console.log(this.detail);
     },
     logout() {
       this.$dialog
@@ -147,6 +146,7 @@ export default {
         })
         .then(() => {
           this.$store.dispatch("user/logout");
+          this.detail = {};
         })
         .catch(() => {});
     },
